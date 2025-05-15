@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // initialize scene 
 const scene = new THREE.Scene();
@@ -18,10 +19,13 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-
+// instantiate the controls
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.enableDamping = true
+controls.autoRotate = true
 function animate() {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  requestAnimationFrame(animate)
+  controls.update()
   renderer.render( scene, camera );
 }
-renderer.setAnimationLoop( animate );
+// renderer.setAnimationLoop( animate );
